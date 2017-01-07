@@ -1,8 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-function App() {
-    return <div>Hello World!</div>;
-}
+import App from './components/app';
 
 render(<App />, document.getElementById('react'));
