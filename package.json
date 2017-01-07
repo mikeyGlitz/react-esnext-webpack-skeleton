@@ -5,7 +5,8 @@
   "scripts": {
     "webpack": "webpack",
     "dev-server": "webpack-dev-server",
-    "test": "jest"
+    "test": "jest",
+    "typecheck": "flow check || exit 0"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
@@ -20,6 +21,7 @@
     "enzyme": "^2.7.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "file-loader": "^0.9.0",
+    "flow-bin": "^0.37.4",
     "html-webpack-plugin": "^2.26.0",
     "jest": "^18.1.0",
     "json-loader": "^0.5.4",
