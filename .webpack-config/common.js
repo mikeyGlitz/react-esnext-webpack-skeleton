@@ -36,10 +36,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [
-                    'style-loader',
-                    { loader: 'css-loader', options: { modules: true } }
-                ]
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: 'css-loader'
+                })
             },
             {
                 test: /\.(woff|woff2|ttf|eot|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
@@ -58,8 +58,8 @@ module.exports = {
         }),
         new ExtractTextPlugin("styles.css"),
         new webpack.optimize.CommonsChunkPlugin({
-        name: 'common',
-        filename: 'common.bundle.js'
-    })
+            name: 'common',
+            filename: 'common.bundle.js'
+        })
     ]
 }
