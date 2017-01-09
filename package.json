@@ -10,6 +10,11 @@
     "docs": "esdoc -c esdoc.json",
     "lint": "eslint ."
   },
+  "dependencies": {
+    "babel-jest": "^18.0.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
@@ -44,18 +49,13 @@
   },
   "babel": {
     "presets": [
-      "es2015",
+      ["es2015", { "modules": false }],
       "react",
       "airbnb"
     ],
     "plugins": [
       "transform-class-properties"
     ]
-  },
-  "dependencies": {
-    "babel-jest": "^18.0.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
   },
   "jest": {
     "collectCoverage": true,
