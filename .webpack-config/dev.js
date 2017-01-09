@@ -5,4 +5,7 @@ module.exports = merge(require('./common'),
 {
     devtool: 'inline-source-map',
     output: { chunkFilename: '[id].bundle.js'},
+    performance: {
+        hints: false
+    }
 });

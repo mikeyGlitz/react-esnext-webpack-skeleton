@@ -10,10 +10,17 @@ const rootdir = path.resolve(__dirname, '..');
 const srcDir = path.resolve(rootdir, 'app');
 const distDir = path.resolve(rootdir, 'public');
 
+const reactDeps = [
+    'react',
+    'react-dom'
+    // Subsequent React dependencies here
+];
+
 module.exports = {
     context: srcDir,
     entry: {
-        'app': 'index.js'
+        'app': 'index.js',
+        'react': reactDeps
     },
     output: {
         path: distDir,
@@ -56,10 +63,13 @@ module.exports = {
             template: 'index.ejs',
             inject: 'body'
         }),
-        new ExtractTextPlugin("styles.css"),
+        new ExtractTextPlugin({
+            filename: "styles.css",
+            disable: false,
+            allChunks: true
+        }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'common',
-            filename: 'common.bundle.js'
+            names: ['common', 'manifest']
         })
     ]
-}
+};
