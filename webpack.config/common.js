@@ -1,10 +1,8 @@
+const commonChunks = require('@easy-webpack/config-common-chunks-simple');
+const { generateConfig } = require("@easy-webpack/core");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const htmlWebpackPlugin = require('html-webpack-plugin');
-
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const path = require('path');
-const webpack = require('webpack');
-
-const debug = process.env.NODE_ENV === 'development';
 
 const rootdir = path.resolve(__dirname, '..');
 const srcDir = path.resolve(rootdir, 'app');
@@ -16,7 +14,7 @@ const reactDeps = [
     // Subsequent React dependencies here
 ];
 
-module.exports = {
+const baseConfig = {
     context: srcDir,
     entry: {
         'app': 'index.js',
@@ -35,11 +33,12 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx?$/,
-                use: ['babel-loader']
+                exclude: /node_modules/,
+                loader: 'babel-loader'
             },
             {
                 test: /\.json$/,
-                use: ['json-loader']
+                loader: 'json-loader'
             },
             {
                 test: /\.css$/,
@@ -50,26 +49,29 @@ module.exports = {
             },
             {
                 test: /\.(woff|woff2|ttf|eot|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
-                use: [{ loader: 'url-loader', query: { limit: 10000 } }]
+                loader: 'url-loader', 
+                query: { limit: 10000 }
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/,
-                use: ['file-loader']
+                loader: 'file-loader'
             }
         ]
     },
     plugins: [
-        new htmlWebpackPlugin({
-            template: 'index.ejs',
-            inject: 'body'
-        }),
         new ExtractTextPlugin({
             filename: "styles.css",
             disable: false,
             allChunks: true
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['common', 'manifest']
-        })
+        new LodashModuleReplacementPlugin()
     ]
 };
+
+module.exports = generateConfig(
+    baseConfig,
+    commonChunks({
+        appChunkName: 'app',
+        firstChunkName: 'react'
+    })
+);

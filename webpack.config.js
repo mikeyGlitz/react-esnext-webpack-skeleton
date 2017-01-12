@@ -1,3 +1,5 @@
+const { stripMetadata } = require("@easy-webpack/core");
+
 let env = process.env.NODE_ENV || 'development';
 
 env = env.toLowerCase();
@@ -5,11 +7,11 @@ env = env.toLowerCase();
 let config = {};
 switch (env) {
     case 'production':
-        config = require('./.webpack-config/prod.js');
+        config = require('./webpack.config/prod.js');
         break;
     default:
     case 'development':
-        config = require('./.webpack-config/dev.js');
+        config = require('./webpack.config/dev.js');
 }
 
-module.exports = config;
+module.exports = stripMetadata(config);
