@@ -38,5 +38,4 @@ This project utilizes the following *npm* tasks to perform the following functio
 | **docs**       | Generates documentation              |
 | **lint**       | Performs linting                     |
 | **test**       | Runs the unit tests using jest       |
-| **typecheck**  | Performs type-checking using flow    |
 | **webpack**    | Builds project sources using webpack |

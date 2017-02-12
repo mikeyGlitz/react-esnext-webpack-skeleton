@@ -1,6 +1,4 @@
-.webpack-config/**
 node_modules/**
 **/docs/**
 **/coverage/**
-webpack.config.js
 public/**

@@ -1,0 +1,23 @@
+{
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.js",
+      "**/*.jsx",
+      "!node_modules/**",
+      "!public/**",
+      "!docs/**",
+      "!coverage/**",
+      "!__tests__/**",
+      "!.webpack-config/**",
+      "!webpack.config.js"
+    ],
+    "unmockedModulePathPatterns": [
+      "node_modules/react/",
+      "node_modules/enzyme/"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "testRegex": "/__tests__/.*\\.(js|jsx)$"
+  }

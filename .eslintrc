@@ -1,4 +1,13 @@
 {
     "parser": "babel-eslint",
-    "extends": "airbnb"
+    "extends": "airbnb",
+    "env": {
+        "browser": true,
+        "node": true,
+        "jest": true
+    },
+    "rules": {
+        "linebreak-style": 0,
+        "comma-dangle": 0
+    }
 }

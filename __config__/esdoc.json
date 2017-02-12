@@ -1,14 +1,14 @@
 {
     "source": "./",
     "destination": "./docs",
+    "includes": ["\\.jsx?$"],
     "excludes": [
-        "node_modules",
-        "coverage",
-        "__tests__",
-        "docs",
-        "\\.webpack-config",
-        "webpack.config.js$",
-        "public"
+        "node_modules(\\\\|/).*",
+        ".*(\\\\|/)coverage(\\\\|/).*",
+        "__tests__(\\\\|/).*",
+        "__config__(\\\\|/).*",
+        ".*(\\\\|/)docs(\\\\|/).*",
+        "public(\\\\|/).*"
     ],
     "coverage": true,
     "manual": {
@@ -17,10 +17,5 @@
     "experimentalProposal": {
         "classProperties": true,
         "objectRestSpread": true
-    },
-    "plugins": [
-        {
-            "name": "esdoc-flow-plugin"
-        }
-    ]
+    }
 }
