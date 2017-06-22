@@ -8,6 +8,15 @@
     },
     "rules": {
         "linebreak-style": 0,
-        "comma-dangle": 0
+        "comma-dangle": 0,
+        "require-jsdoc": ["error", {
+            "require": {
+                "FunctionDeclaration": true,
+                "ClassDeclaration": true,
+                "MethodDefinition": true,
+                "ArrowFunctionExpression": true
+            }
+        }],
+        "valid-jsdoc":"error"
     }
 }

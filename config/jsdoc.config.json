@@ -1,0 +1,25 @@
+{
+    "source": {
+        "includePattern": "\\.jsx?$",
+        "exclude": [
+            "node_modules/**",
+            "gulpfile.js",
+            "config/**",
+            "**/dist/**",
+            "**/coverage/**",
+            "**/docs/**"
+        ]
+    },
+    "tags":{
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc", "closure"]
+    },
+    "opts":{
+        "destination": "docs",
+        "readme": "README.md",
+        "recurse": true
+    },
+    "plugins": [
+        "plugins/markdown"
+    ]
+}
