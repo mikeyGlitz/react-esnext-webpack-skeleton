@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashWebpackPlugin = require('lodash-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin');
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const { version } = require('../package.json');
 const { env, isDevelopment } = require('../envhelper');
@@ -44,19 +45,21 @@ const config = {
       { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader' },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              sourceMap: isDevelopment,
-              includeLoaders: 1,
-              localIdentName: '[name]__[local]__[hash:base64:5]'
-            }
-          },
-          'postcss-loader'
-        ]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                sourceMap: isDevelopment,
+                includeLoaders: 1,
+                localIdentName: '[name]__[local]__[hash:base64:5]'
+              }
+            },
+            'postcss-loader'
+          ]
+        })
       }
     ]
   },
@@ -81,6 +84,7 @@ const config = {
       fetch: require('whatwg-fetch')
       /* eslint-enable */
     }),
+    new ExtractTextPlugin({ filename: 'styles.css', allChunks: true }),
     new HtmlWebpackPlugin({
       title,
       template,
