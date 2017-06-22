@@ -77,7 +77,8 @@ const config = {
     new webpack.ProvidePlugin({
       /* eslint-disable global-require */
       Promise: require('bluebird'),
-      regeneratorRuntime: require('regenerator-runtime')
+      regeneratorRuntime: require('regenerator-runtime'),
+      fetch: require('whatwg-fetch')
       /* eslint-enable */
     }),
     new HtmlWebpackPlugin({

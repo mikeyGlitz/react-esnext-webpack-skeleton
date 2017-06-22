@@ -15,7 +15,8 @@
     "bluebird": "^3.5.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "regenerator-runtime": "^0.10.5"
+    "regenerator-runtime": "^0.10.5",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "@easy-webpack/config-generate-index-html": "^2.1.1",
