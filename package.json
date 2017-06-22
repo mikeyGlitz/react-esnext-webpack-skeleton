@@ -1,6 +1,6 @@
 {
   "name": "react-esnext-skeleton",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "build": "webpack --config config/webpack.config.js",
