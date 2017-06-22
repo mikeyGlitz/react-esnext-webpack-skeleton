@@ -19,5 +19,11 @@
       "js",
       "jsx"
     ],
+    "moduleNameMapper": {
+      "^.+\\.css$": "identity-obj-proxy"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
     "testRegex": "/__tests__/.*\\.(js|jsx)$"
   }
