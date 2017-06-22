@@ -1,12 +1,12 @@
 {
     "presets": [
         ["es2015", { "loose": true, "modules": false }],
-        "env",
         "react",
         "airbnb"
     ],
     "plugins": [
         "transform-class-properties",
+        "syntax-async-functions",
         "lodash"
     ]
 }

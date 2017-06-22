@@ -37,5 +37,6 @@ This project utilizes the following *npm* tasks to perform the following functio
 | **dev-server** | Runs the webpack dev server          |
 | **docs**       | Generates documentation              |
 | **lint**       | Performs linting                     |
+| **lint:styles  | Lints stylesheets                    |
 | **test**       | Runs the unit tests using jest       |
 | **webpack**    | Builds project sources using webpack |

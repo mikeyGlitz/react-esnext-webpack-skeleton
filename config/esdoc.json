@@ -1,0 +1,21 @@
+{
+    "source": "./",
+    "destination": "./docs",
+    "includes": ["\\.jsx?$"],
+    "excludes": [
+        "node_modules(\\\\|/).*",
+        ".*(\\\\|/)coverage(\\\\|/).*",
+        "__tests__(\\\\|/).*",
+        "__config__(\\\\|/).*",
+        ".*(\\\\|/)docs(\\\\|/).*",
+        "public(\\\\|/).*"
+    ],
+    "coverage": true,
+    "manual": {
+        "index": "README.md"
+    },
+    "experimentalProposal": {
+        "classProperties": true,
+        "objectRestSpread": true
+    }
+}
