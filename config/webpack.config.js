@@ -33,7 +33,16 @@ const config = {
     rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader'
+        use: {
+          loader: 'babel-loader',
+          options: {
+            env: {
+              development: {
+                plugins: ['react-hot-loader/babel']
+              }
+            }
+          }
+        }
       },
       {
         test: /\.json$/,
@@ -78,11 +87,9 @@ const config = {
       'process.env.NODE_ENV': env
     }),
     new webpack.ProvidePlugin({
-      /* eslint-disable global-require */
-      Promise: require('bluebird'),
-      regeneratorRuntime: require('regenerator-runtime'),
-      fetch: require('whatwg-fetch')
-      /* eslint-enable */
+      Promise: 'bluebird',
+      regeneratorRuntime: 'regenerator-runtime',
+      fetch: 'whatwg-fetch'
     }),
     new ExtractTextPlugin({ filename: 'styles.css', allChunks: true }),
     new HtmlWebpackPlugin({
