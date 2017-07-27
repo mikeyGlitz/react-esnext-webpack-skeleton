@@ -19,11 +19,12 @@ const minify = isDevelopment ? false : {
 
 const config = {
   entry: {
-    app: path.resolve('app/index'),
-    react: ['react', 'react-dom']
+    app: ['babel-polyfill', path.resolve('app/index')],
+    react: ['react', 'react-dom', 'prop-types']
   },
   output: {
     path: path.resolve('dist'),
+    publicPath: '/',
     filename: isDevelopment ? '[name].bundle.js' : '[name].[hash].bundle.js'
   },
   resolve: {
@@ -33,6 +34,7 @@ const config = {
     rules: [
       {
         test: /\.jsx?$/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -79,7 +81,6 @@ const config = {
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
       debug: isDevelopment
     }),
@@ -87,9 +88,9 @@ const config = {
       'process.env.NODE_ENV': env
     }),
     new webpack.ProvidePlugin({
-      Promise: 'bluebird',
-      regeneratorRuntime: 'regenerator-runtime',
-      fetch: 'whatwg-fetch'
+      Promise: 'imports-loader?this=>global!exports-loader?global.Promise!bluebird',
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
+      regeneratorRuntime: 'regenerator-runtime'
     }),
     new ExtractTextPlugin({ filename: 'styles.css', allChunks: true }),
     new HtmlWebpackPlugin({
@@ -117,11 +118,26 @@ switch (env) {
     break;
   default:
   case 'development':
-    config.devtool = 'inline-source-map';
+    config.devtool = 'eval';
+    config.entry.app = [
+      'webpack/hot/only-dev-server',
+      'webpack-dev-server/client?http://localhost:8080',
+      'react-hot-loader/patch',
+      ...config.entry.app
+    ];
+    config.plugins = [
+      new webpack.HotModuleReplacementPlugin(),
+      ...config.plugins
+    ];
     config.devServer = {
       hot: true,
+      quiet: false,
       port: 8080,
-      publicPath: 'http://localhost:8080'
+      inline: true,
+      contentBase: 'http://localhost:8080/',
+      stats: {
+        colors: true
+      }
     };
     break;
 }

@@ -1,12 +1,32 @@
 {
-    "presets": [
-        ["es2015", { "loose": true, "modules": false }],
-        "react",
-        "airbnb"
+  "sourceMaps": false,
+  "presets": [
+    [
+      "airbnb",
+      {
+        "modules": false
+      }
     ],
-    "plugins": [
-        "transform-class-properties",
-        "syntax-async-functions",
-        "lodash"
-    ]
+    "react"
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "syntax-async-functions",
+    "lodash"
+  ],
+  "env": {
+    "development": {
+      "sourceMaps": true,
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    },
+    "test": {
+      "presets": [
+        "airbnb",
+        "react"
+      ],
+      "sourceMaps": true
+    }
+  }
 }
