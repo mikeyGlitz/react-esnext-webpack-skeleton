@@ -1,31 +1,45 @@
 {
-  "sourceMaps": false,
+  "plugins": [
+    "lodash",
+    "transform-class-properties",
+    "transform-async-to-generator"
+  ],
   "presets": [
     [
       "airbnb",
       {
-        "modules": false
+        "targets": {
+          "browsers": [
+            "last 2 versions",
+            "ie 11"
+          ],
+          "node": "8.9.1"
+        }
       }
     ],
     "react"
   ],
-  "plugins": [
-    "transform-class-properties",
-    "syntax-async-functions",
-    "lodash"
-  ],
   "env": {
-    "development": {
-      "sourceMaps": true,
-      "plugins": [
-        "react-hot-loader/babel"
+    "production": {
+      "presets": [
+        [
+          "airbnb",
+          {
+            "modules": false,
+            "loose": true,
+            "targets": {
+              "browsers": [
+                "last 2 versions",
+                "ie = 11"
+              ],
+              "node": "8.9.1"
+            }
+          }
+        ],
+        "react"
       ]
     },
     "test": {
-      "presets": [
-        "airbnb",
-        "react"
-      ],
       "sourceMaps": true
     }
   }

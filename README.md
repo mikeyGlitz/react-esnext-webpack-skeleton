@@ -3,8 +3,12 @@
 This project contains all the scaffolding code to build a webapp using React and ES2015.
 Some proposal features have been added to the babel parsing such as __object rest spread__
 and __class properties__.
-This project is also configured to run with [Facebook's Flow](https://flowtype.org) for type checking,
+This project is also configured to run with 
 [Facebook's Jest](https://facebook.github.io/jest) for testing and coverage, and eslint for static code analysis
+
+**Stylesheets** This project uses standard css as well as postcss for stylesheets.
+To use standard css (which will apply globally with no mangling for classes), save your
+file as a `.css` file. To use postcss, save your file as a `.pcss` file.
 
 ## Project Structure
 

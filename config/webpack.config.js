@@ -14,48 +14,39 @@ const template = path.resolve('app/index.html');
 const minify = isDevelopment ? false : {
   collapseBooleanAttributes: true,
   collapseWhitespace: true,
-  removeComments: true
+  removeComments: true,
 };
 
 const config = {
   entry: {
     app: ['babel-polyfill', path.resolve('app/index')],
-    react: ['react', 'react-dom', 'prop-types']
+    react: ['react', 'react-dom', 'prop-types'],
   },
   output: {
     path: path.resolve('dist'),
     publicPath: '/',
-    filename: isDevelopment ? '[name].bundle.js' : '[name].[hash].bundle.js'
+    filename: isDevelopment ? '[name].bundle.js' : '[name].[hash].bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css', '.json']
+    extensions: ['.js', '.jsx', '.css', '.json'],
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            env: {
-              development: {
-                plugins: ['react-hot-loader/babel']
-              }
-            }
-          }
-        }
+        use: ['react-hot-loader/webpack', 'babel-loader'],
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        loader: 'json-loader',
       },
       { test: /\.(png|gif|jpg|cur)$/, loader: 'url-loader', query: { limit: 8192 } },
       { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader', query: { limit: 10000, mimetype: 'application/font-woff2' } },
       { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader', query: { limit: 10000, mimetype: 'application/font-woff' } },
       { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader' },
       {
-        test: /\.css$/,
+        test: /\.pcss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
@@ -65,14 +56,21 @@ const config = {
                 modules: true,
                 sourceMap: isDevelopment,
                 includeLoaders: 1,
-                localIdentName: '[name]__[local]__[hash:base64:5]'
-              }
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+              },
             },
-            'postcss-loader'
-          ]
-        })
-      }
-    ]
+            'postcss-loader',
+          ],
+        }),
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader']
+        }),
+      },
+    ],
   },
   plugins: [
     new LodashWebpackPlugin(),
@@ -82,10 +80,10 @@ const config = {
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.LoaderOptionsPlugin({
-      debug: isDevelopment
+      debug: isDevelopment,
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': env
+      'process.env.NODE_ENV': env,
     }),
     new webpack.ProvidePlugin({
       Promise: 'imports-loader?this=>global!exports-loader?global.Promise!bluebird',
@@ -97,7 +95,7 @@ const config = {
       title,
       template,
       version,
-      minify
+      minify,
     }),
   ]
 };
@@ -127,7 +125,7 @@ switch (env) {
     ];
     config.plugins = [
       new webpack.HotModuleReplacementPlugin(),
-      ...config.plugins
+      ...config.plugins,
     ];
     config.devServer = {
       hot: true,
@@ -136,7 +134,7 @@ switch (env) {
       inline: true,
       contentBase: 'http://localhost:8080/',
       stats: {
-        colors: true
+        colors: true,
       }
     };
     break;
